@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,7 @@ export class AuthComponent {
   isLogin = true;
   authForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.authForm = this.createForm();
   }
 
@@ -62,6 +63,8 @@ export class AuthComponent {
       } else {
         console.log('Signup:', formData);
       }
+
+      this.router.navigate(['/dashboard']);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,17 +9,26 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     <nav class="navbar">
       <div class="navbar-container">
         <div class="logo">
-          <span class="logo-text">PetCare</span>
+          <span class="logo-text">🐾 PetCare</span>
         </div>
         <ul class="nav-links">
           <li>
-            <a routerLink="/home" routerLinkActive="active">Home</a>
+            <a routerLink="/dashboard" routerLinkActive="active">Home</a>
           </li>
           <li>
-            <a routerLink="/about" routerLinkActive="active">About Us</a>
+            <a routerLink="/shop" routerLinkActive="active">Shop</a>
           </li>
           <li>
-            <a routerLink="/contact" routerLinkActive="active">Contact</a>
+            <a routerLink="/vaccines" routerLinkActive="active">Vaccines</a>
+          </li>
+          <li>
+            <a routerLink="/vets" routerLinkActive="active">Vets</a>
+          </li>
+          <li>
+            <a routerLink="/profile" routerLinkActive="active">Profile</a>
+          </li>
+          <li>
+            <a class="logout-btn" (click)="logout()">Logout</a>
           </li>
         </ul>
       </div>
@@ -81,6 +90,20 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       background-color: rgba(245, 245, 220, 0.15);
     }
 
+    .logout-btn {
+      cursor: pointer;
+      background: #F5F5DC;
+      color: #3E2723;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem !important;
+    }
+
+    .logout-btn:hover {
+      background: #FFD700 !important;
+      color: #3E2723 !important;
+      transform: scale(1.05);
+    }
+
     @media (max-width: 768px) {
       .navbar-container {
         flex-direction: column;
@@ -89,8 +112,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
       .nav-links {
         gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   `]
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  constructor(private router: Router) {}
+
+  logout() {
+    this.router.navigate(['/auth']);
+  }
+}
